@@ -1,0 +1,79 @@
+﻿@startuml
+title Кинобездна. Диаграмма контейнеров
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+Person(user, "Клиент системы Кинобездны", "(Web, Mobile, Smart TV)")
+
+System_Boundary(CinemaAbyss, "Система кинобездна") {
+  Container(WebApp, "Web application", "", "Веб-приложение для просмотра фильмов и сериалов")
+  Container(MobileApp, "Mobile application", "", "Мобильное приложение для iOS и Android")
+  Container(SmartApp, "Smart TV application", "", "Приложение для Smart TV")
+
+  Container(WebGateway, "Web API BFF", "", "Оптимизированный API для веб-приложения")
+  Container(MobileGateway, "Mobile API BFF", "", "Оптимизированный API для мобильного приложения")
+  Container(SmartGateway, "Smart TV API BFF", "", "Оптимизированный API для Smart TV приложения")
+
+  Container(Gateway, "API Gateway", "", "Маршрутизация запросов к сервисам, аутентификация и авторизация")
+  
+  Container(AuthorizationService, "Authorization service", "Go", "Регистрация, авторизация")
+  ContainerDb(AuthorisationDb, "Authorization DB", "PostgreSQL", "Хранилище учётных записей")
+
+  Container(UserService, "User profile service", "Go", "Профили пользователей")
+  ContainerDb(UserDb, "User Profile DB", "PostgreSQL", "Данные профилей пользователей (настройки, предпочтения, подписки)")
+
+  Container(paymentService, "Payment Service", "Go", "Обработка платежей и взаимодействие с внешними платёжными системами")
+  ContainerDb(payment_db, "Payment DB", "PostgreSQL", "Транзакции, статусы, история оплат")
+
+  Container(MovieMetaService, "Movie Metadata Service", "Go", "Метаданные фильмов: описания, постеры, жанры, рейтинги")
+  ContainerDb(MovieMetaDb, "Movie Metadata DB", "PostgreSQL", "Каталог фильмов и сериалов")
+
+  Container(Streaming, "Streaming API Service", "Go", "Доступ к онлайн-кинотеатрам (API интеграции)")
+
+  Container(ActivityService, "Activity service", "Go ", "Сервис обработки активности пользователя (просмотры, лайки)")
+  ContainerQueue(kafka, "Kafka", "", "Брокер сообщений для обмена событиями между сервисами")
+}
+
+System_Ext(PaymentGateway, "External Payment service", "Внешний платёжный шлюз")
+System_Ext(VideoHostSystem, "External Video Host System", "Партнёрские кинотеатры и видеосервисы")
+System_Ext(RecommendSystem, "External Recommend System", "Внешняя система рекомендаций на основе ИИ")
+
+Rel(user, WebApp, "Использование")
+Rel(user, MobileApp, "Использование")
+Rel(user, SmartApp, "Использование")
+
+Rel(WebApp, WebGateway, "запросы", "REST")
+Rel(MobileApp, MobileGateway, "запросы", "REST")
+Rel(SmartApp, SmartGateway, "запросы", "REST")
+
+Rel(WebGateway, Gateway, "запросы", "REST")
+Rel(MobileGateway, Gateway, "запросы", "REST")
+Rel(SmartGateway, Gateway, "запросы", "REST")
+
+Rel(Gateway, AuthorizationService, "Авторизация / регистрация", "REST")
+Rel(Gateway, paymentService, "Платежи", "REST")
+Rel(Gateway, Streaming, "Запросы на стриминг", "REST")
+Rel(Gateway, ActivityService, "Отправка событий", "REST")
+Rel(Gateway, UserService, "Получение данных профиля", "REST")
+Rel(Gateway, MovieMetaService, "Получение каталога фильмов и метаданных", "REST")
+
+Rel(AuthorizationService, AuthorisationDb, "чтение и запись")
+Rel(UserService, UserDb, "чтение и запись")
+Rel(paymentService, payment_db, "чтение и запись")
+Rel(MovieMetaService, MovieMetaDb, "чтение и запись")
+
+Rel(AuthorizationService, kafka, "Публикует события создание/обновление пользователей")
+Rel(paymentService, kafka, "Публикует события обработки платежей")
+Rel(ActivityService, kafka, "Публикует события активности")
+
+
+Rel(UserService, kafka, "Получает события связанные с пользователями")
+Rel(MovieMetaService, kafka, "Получает события связанные с активностью пользователей")
+
+Rel(Streaming, VideoHostSystem, "Интеграция с внешними кинотеатрами")
+Rel(paymentService, PaymentGateway, "Оплата через внешний шлюз")
+
+Rel(MovieMetaService, RecommendSystem, "Отправка оценок, получение рекомендаций")
+
+@enduml
