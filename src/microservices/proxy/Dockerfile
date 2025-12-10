@@ -1,16 +1,15 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
 USER $APP_UID
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 8000
 
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["proxy/proxy.csproj", "proxy/"]
-RUN dotnet restore "proxy/proxy.csproj"
+WORKDIR /src/microservices/proxy
+COPY ["proxy.csproj", "microservices/proxy/"]
+RUN dotnet restore "microservices/proxy/proxy.csproj"
 COPY . .
-WORKDIR "/src/proxy"
+WORKDIR "/src/microservices/proxy"
 RUN dotnet build "./proxy.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

@@ -1,16 +1,15 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
 USER $APP_UID
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 8082
 
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["events/events.csproj", "events/"]
-RUN dotnet restore "events/events.csproj"
+WORKDIR /src/microservices/events
+COPY ["events.csproj", "microservices/events/"]
+RUN dotnet restore "microservices/events/events.csproj"
 COPY . .
-WORKDIR "/src/events"
+WORKDIR "/src/microservices/events"
 RUN dotnet build "./events.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
