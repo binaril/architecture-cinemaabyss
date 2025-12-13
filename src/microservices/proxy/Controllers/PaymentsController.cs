@@ -6,7 +6,7 @@ namespace proxy.Controllers;
 
 [ApiController]
 [Route("api/payments")]
-public class PaymentsController(PaymentsGatewayService gatewayService): ControllerBase
+public class PaymentsController(PaymentsGatewayService gatewayService) : ControllerBase
 {
     [HttpGet]
     public async Task<List<Payment>> Get([FromQuery] int user_id)
@@ -19,5 +19,4 @@ public class PaymentsController(PaymentsGatewayService gatewayService): Controll
     {
         return await gatewayService.Create(user);
     }
-    
 }

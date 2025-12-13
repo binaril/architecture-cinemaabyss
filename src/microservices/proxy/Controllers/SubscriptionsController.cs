@@ -6,7 +6,7 @@ namespace proxy.Controllers;
 
 [ApiController]
 [Route("api/subscriptions")]
-public class SubscriptionsController(SubscriptionsGatewayService gatewayService): ControllerBase
+public class SubscriptionsController(SubscriptionsGatewayService gatewayService) : ControllerBase
 {
     [HttpGet]
     public async Task<List<Subscription>> Get([FromQuery] int user_id)
@@ -19,5 +19,4 @@ public class SubscriptionsController(SubscriptionsGatewayService gatewayService)
     {
         return await gatewayService.Create(user);
     }
-    
 }

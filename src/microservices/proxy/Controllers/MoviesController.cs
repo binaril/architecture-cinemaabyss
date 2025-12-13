@@ -6,7 +6,7 @@ namespace proxy.Controllers;
 
 [ApiController]
 [Route("api/movies")]
-public class MoviesController(MovieGatewayService gatewayService): ControllerBase
+public class MoviesController(MovieGatewayService gatewayService) : ControllerBase
 {
     [HttpGet]
     public async Task<List<Movie>> Get()
@@ -19,5 +19,4 @@ public class MoviesController(MovieGatewayService gatewayService): ControllerBas
     {
         return await gatewayService.Create(user);
     }
-    
 }

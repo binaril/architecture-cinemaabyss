@@ -46,6 +46,9 @@
 - Протестируйте постепенный переход, изменив переменную окружения MOVIES_MIGRATION_PERCENT в файле docker-compose.yml.
 
 
+
+**Реализовано и протестировано**
+
 ### 2. Kafka
  Вам как архитектуру нужно также проверить гипотезу насколько просто реализовать применение Kafka в данной архитектуре.
 
@@ -56,7 +59,14 @@
     - Добавьте в docker-compose новый сервис, kafka там уже есть
 
 Необходимые тесты для проверки этого API вызываются при запуске npm run test:local из папки tests/postman 
-Приложите скриншот тестов и скриншот состояния топиков Kafka из UI http://localhost:8090 
+Приложите скриншот тестов и скриншот состояния топиков Kafka 
+
+**MVP сервис разработан, скриншоты:**
+
+[тесты](https://github.com/binaril/architecture-cinemaabyss/blob/cinema/tests/screenshots/tests.png)
+
+[kafka](https://github.com/binaril/architecture-cinemaabyss/blob/cinema/tests/screenshots/kafka.png)
+
 
 # Задание 3
 

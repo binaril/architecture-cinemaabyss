@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
-using proxy.Models;
+using events.Models;
 
-namespace proxy.Middleware;
+namespace events.Middleware;
 
 public class ExceptionMiddleware
 {
