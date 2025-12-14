@@ -2,10 +2,9 @@
 
 # Задание 1
 
-1. Спроектируйте to be архитектуру КиноБездны, разделив всю систему на отдельные домены и организовав интеграционное взаимодействие и единую точку вызова сервисов.
-Результат представьте в виде контейнерной диаграммы в нотации С4.
-Добавьте ссылку на файл в этот шаблон
-[ссылка на файл](ссылка)
+1. to be архитектура КиноБездны
+
+[диаграмма контейнеров](https://github.com/binaril/architecture-cinemaabyss/blob/cinema/doc/C4.Containers.png)
 
 # Задание 2
 
@@ -47,6 +46,9 @@
 - Протестируйте постепенный переход, изменив переменную окружения MOVIES_MIGRATION_PERCENT в файле docker-compose.yml.
 
 
+
+**Реализовано и протестировано**
+
 ### 2. Kafka
  Вам как архитектуру нужно также проверить гипотезу насколько просто реализовать применение Kafka в данной архитектуре.
 
@@ -57,7 +59,14 @@
     - Добавьте в docker-compose новый сервис, kafka там уже есть
 
 Необходимые тесты для проверки этого API вызываются при запуске npm run test:local из папки tests/postman 
-Приложите скриншот тестов и скриншот состояния топиков Kafka из UI http://localhost:8090 
+Приложите скриншот тестов и скриншот состояния топиков Kafka 
+
+**MVP сервис разработан, скриншоты:**
+
+[тесты](https://github.com/binaril/architecture-cinemaabyss/blob/cinema/tests/screenshots/tests.png)
+
+[kafka](https://github.com/binaril/architecture-cinemaabyss/blob/cinema/tests/screenshots/kafka.png)
+
 
 # Задание 3
 
@@ -276,6 +285,15 @@ cat .docker/config.json | base64
 Добавьте сюда скриншота вывода при вызове https://cinemaabyss.example.com/api/movies и  скриншот вывода event-service после вызова тестов.
 
 
+[скриншот /api/movies](https://github.com/binaril/architecture-cinemaabyss/blob/cinema/tests/screenshots/api_movies.png)
+
+[event-service log](https://github.com/binaril/architecture-cinemaabyss/blob/cinema/tests/screenshots/event-service_log.png)
+
+
+
+
+
+
 # Задание 4
 Для простоты дальнейшего обновления и развертывания вам как архитектуру необходимо так же реализовать helm-чарты для прокси-сервиса и проверить работу 
 
@@ -349,6 +367,11 @@ minikube tunnel
 Потом вызовите 
 https://cinemaabyss.example.com/api/movies
 и приложите скриншот развертывания helm и вывода https://cinemaabyss.example.com/api/movies
+
+
+
+[helm screenshots](https://github.com/binaril/architecture-cinemaabyss/blob/cinema/tests/screenshots/helm.png)
+
 
 ## Удаляем все
 

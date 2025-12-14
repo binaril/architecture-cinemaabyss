@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "events", "microservices\events\events.csproj", "{D380FD94-9D25-4D9A-9B70-5CAC9052BA5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "proxy", "microservices\proxy\proxy.csproj", "{33713F22-60EA-4156-82CA-C74BD6ABEE87}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D380FD94-9D25-4D9A-9B70-5CAC9052BA5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D380FD94-9D25-4D9A-9B70-5CAC9052BA5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D380FD94-9D25-4D9A-9B70-5CAC9052BA5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D380FD94-9D25-4D9A-9B70-5CAC9052BA5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33713F22-60EA-4156-82CA-C74BD6ABEE87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33713F22-60EA-4156-82CA-C74BD6ABEE87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33713F22-60EA-4156-82CA-C74BD6ABEE87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33713F22-60EA-4156-82CA-C74BD6ABEE87}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
